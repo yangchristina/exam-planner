@@ -1,27 +1,49 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "@radix-ui/colors/amber.css";
+@import "@radix-ui/colors/blue.css";
+@import "@radix-ui/colors/bronze.css";
+@import "@radix-ui/colors/brown.css";
+@import "@radix-ui/colors/cyan.css";
+@import "@radix-ui/colors/gold.css";
+@import "@radix-ui/colors/grass.css";
+@import "@radix-ui/colors/lime.css";
+@import "@radix-ui/colors/mint.css";
+@import "@radix-ui/colors/olive.css";
+@import "@radix-ui/colors/orange.css";
+@import "@radix-ui/colors/pink.css";
+@import "@radix-ui/colors/plum.css";
+@import "@radix-ui/colors/sky.css";
+@import "@radix-ui/colors/teal.css";
+@import "@radix-ui/colors/tomato.css";
+@import "@radix-ui/colors/violet.css";
+@import "@radix-ui/colors/yellow.css";
+@import "@radix-ui/colors/amber.css";
+@import "@radix-ui/colors/blue.css";
+@import "@radix-ui/colors/bronze.css";
+@import "@radix-ui/colors/brown.css";
+@import "@radix-ui/colors/cyan.css";
+@import "@radix-ui/colors/gold.css";
+@import "@radix-ui/colors/grass.css";
+@import "@radix-ui/colors/lime.css";
+@import "@radix-ui/colors/mint.css";
+@import "@radix-ui/colors/olive.css";
+@import "@radix-ui/colors/orange.css";
+@import "@radix-ui/colors/pink.css";
+@import "@radix-ui/colors/plum.css";
+@import "@radix-ui/colors/sky.css";
+@import "@radix-ui/colors/teal.css";
+@import "@radix-ui/colors/tomato.css";
+@import "@radix-ui/colors/violet.css";
+@import "@radix-ui/colors/yellow.css";
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+  --text: var(--blue12);
+  --background: white;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: var(--text);
+  background: var(--background);
 }
