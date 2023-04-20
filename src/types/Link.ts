@@ -11,7 +11,7 @@ export type Link = z.infer<typeof LinkSchema>
 export const LinkListSchema = z.array(LinkSchema)
 
 export const LinkListFormSchema = z.object({
-    links: z.preprocess((val: any) => preFilterArrayByField(val, 'url'), LinkListSchema)
+    links: z.preprocess((val: any) => preFilterArrayByField(val, 'url') || [], LinkListSchema)
 })
 
 export function isLink(obj: unknown): obj is Link {
