@@ -28,7 +28,7 @@ const Page = styled('div', {
 
 
 export default function Home() {
-  const { items } = useForageArray<Exam>('exams', isExam)
+  const { items, remove } = useForageArray<Exam>('exams', isExam)
   const stub = () => {
     console.log('stub')
   }
@@ -46,7 +46,7 @@ export default function Home() {
       />
       {items.length > 0 ? <div className='overflow-auto flex flex-wrap p-8 gap-y-6' >
         {
-          items.map((exam, i) => <Course key={i} exam={exam} />)
+          items.map((exam, i) => <Course key={i} exam={exam} removeExam={()=>remove(i)} />)
         }
       </div> : <div className='text-xl m-auto' >Add an exam to start (top right corner)</div>}
         <ExamForm>

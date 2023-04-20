@@ -32,7 +32,7 @@ const weightedAverage = (nums: number[], weights: number[]) => {
 
 
 // TODO: Cross out once past
-const Course = ({ exam }: { exam: Exam }) => {
+const Course = ({ exam, removeExam }: { exam: Exam, removeExam: () => void }) => {
     const isFinished = exam.dateStart < Date.now()
     const [mode, setMode] = useState(0)
     const { item: links, set, isLoading } = useForageItem<Link[]>(`${exam.id}-practiceExams`, isLinkList, [])
@@ -51,6 +51,7 @@ const Course = ({ exam }: { exam: Exam }) => {
     return (
         <div className="relative w-96 h-96 mx-auto bg-white rounded-xl shadow-lg flex flex-col items-stretch border-2" >
             <CourseHeader exam={exam} setMode={setMode}
+                removeExam={removeExam}
                 title={mode === 1 ? "Practice exams" : mode === 0 ? exam.name : "Learning Goals"}
                 subtitle={mode === 1 ? exam.name : mode > 2 ? unitMap[mode].name : undefined}
             />
