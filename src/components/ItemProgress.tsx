@@ -19,7 +19,7 @@ const ItemProgress = ({ progress, width }: { progress: number, width?: string | 
     return (
         <SlidersWrapper css={{ ...(width !== undefined && { width }) }} >
             <Flex>
-                {/* <label>Progress</label> */}
+                <label>Progress</label>
                 {/* <Image
                     style={{ top: 5, right: '0' }}
                     width={70} height={40}

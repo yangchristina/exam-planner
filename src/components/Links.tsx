@@ -33,8 +33,6 @@ const Links = ({ links, set }: {
         resolver: zodResolver(LinkListFormSchema)
     })
 
-    console.log("links", links.filter(x => x.checked).length / links.length)
-
     async function editChecked(index: number, checked: boolean) {
         console.log('checked o', checked, index)
         if (index < 0 || index >= links.length) return

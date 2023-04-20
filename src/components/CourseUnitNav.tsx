@@ -28,7 +28,7 @@ const CourseUnitNav = ({ setMode, units: items, addUnit, removeUnit }: {
                 }
                 <AddUnitButton color={getColorNum(items.length)} add={addUnit} />
                 {items.length % 2 === 0 && <NonUnitButton type={getColorNum(items.length + 1)} />}
-                <button onClick={() => setMode(1)} className={`h-10 bg-blue-300 col-span-2`} >Practice exams</button>
+                <button onClick={() => setMode(1)} className={`hover:opacity-75 h-10 bg-blue-300 col-span-2`} >Practice exams</button>
             </Grid>
         </div>
     )

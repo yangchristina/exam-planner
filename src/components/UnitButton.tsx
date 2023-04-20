@@ -10,8 +10,11 @@ import { editForageObjectArray } from '@/utils/forage'
 import { CheckIcon, Pencil1Icon } from '@radix-ui/react-icons'
 import ContextMenu from './ContextMenu'
 
-const Button = styled("button", {
+const style = {
   background: '',
+  '&:hover': {
+    opacity: 0.5
+  },
   variants: {
     type: {
       0: {
@@ -22,21 +25,11 @@ const Button = styled("button", {
       }
     }
   }
-})
+}
 
-export const NonUnitButton = styled("div", {
-  background: '',
-  variants: {
-    type: {
-      0: {
-        background: 'white'
-      },
-      1: {
-        background: '$gray4'
-      }
-    }
-  }
-})
+const Button = styled("button", style)
+
+export const NonUnitButton = styled("div", style)
 // interface Option {
 //   label: string,
 //   rightSlot?: JSX.Element,

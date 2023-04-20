@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import CheckList from './CheckList'
-import { Pencil1Icon } from '@radix-ui/react-icons'
+import { CheckCircledIcon, CheckIcon, Pencil1Icon } from '@radix-ui/react-icons'
 import { IconBar } from './Course'
 import { FullUnit } from '@/types/Unit'
 import { useOutsideAlerter } from '@/hooks/useOutsideAlerter'
@@ -48,9 +48,12 @@ const LearningGoals = ({ unitId, examId, unit, debouncedEdit, setChecked }: {
                 <Pencil1Icon className='h-5 w-5 z-10' onClick={() => setIsEditing(p => !p)} />
             </IconBar>
             {isEditing ?
-                <textarea ref={outsideAlertRef} defaultValue={storage} className='border w-full h-full'
-                    onChange={(e) => debouncedEdit(unitId, e.target.value)}
-                />
+                <div className='relative w-full h-full'>
+                    <textarea ref={outsideAlertRef} defaultValue={storage} className='border w-full h-full resize-none'
+                        onChange={(e) => debouncedEdit(unitId, e.target.value)}
+                    />
+                    <CheckCircledIcon className='absolute bottom-2 right-2' />
+                </div>
                 : <CheckList
                     items={list.map(({ text, checked }) => ({ html: <div>{text}</div>, checked }))}
                     handleChecked={async (index, checked) => {
