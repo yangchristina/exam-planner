@@ -31,9 +31,9 @@ export default function useUnits(examId: string) {
         return map
     }, [keyValueItems, isLoading])
 
-    const unitAverageProgress = Object.values(unitMap).reduce(
+    const unitAverageProgress = Object.values(unitMap).length > 0 ? Object.values(unitMap).reduce(
         (acc, { learningGoals: { progress } }) => acc + progress, 0
-    ) / Object.values(unitMap).length
+    ) / Object.values(unitMap).length : null
 
     const debouncedEditLearningGoals = useCallback(debounce(async (unitId: number, para: string) => {
         const list = storageToList(para)

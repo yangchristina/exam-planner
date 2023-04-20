@@ -39,8 +39,11 @@ const Course = ({ exam }: { exam: Exam }) => {
 
     const { unitMap, addUnit, removeUnit, unitAverageProgress, setChecked, debouncedEditLearningGoals } = useUnits(exam.id)
 
-    const practiceExamProgress = links.filter(x => x.checked).length / links.length
-    const decimalProgress = mode === 0 ? weightedAverage([unitAverageProgress, practiceExamProgress], [0.5, 0.5]) : mode === 1 ? practiceExamProgress : (unitMap[mode].learningGoals.progress || 0)
+    const practiceExamProgress = links.length > 0 ? links.filter(x => x.checked).length / links.length : 0
+    const decimalProgress = mode === 0 ?
+        weightedAverage([unitAverageProgress || 0, practiceExamProgress], links.length > 0 && unitAverageProgress ? [0.5, 0.5] :  links.length > 0 ? [0, 1] : [1, 0])
+        : mode === 1 ? practiceExamProgress
+            : (unitMap[mode].learningGoals.progress || 0)
     const progress = decimalProgress * 100
 
     if (isLoading) return <div>Loading...</div>
