@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import CheckList from './CheckList'
 import useForageItem from '@/hooks/useForageItem'
 import { Pencil1Icon } from '@radix-ui/react-icons'
@@ -6,6 +6,7 @@ import { IconBar } from './Course'
 import { debounce } from 'lodash'
 import { Checkable } from '@/types/Course'
 import { FullUnit } from '@/types/Unit'
+import { useOutsideAlerter } from '@/hooks/useOutsideAlerter'
 
 function storageToList(para: string) {
     return para.split("\n").filter(Boolean).map((item) => {
@@ -30,6 +31,9 @@ const LearningGoals = ({ unitId, examId, unit, debouncedEdit, setChecked }: {
     // every newline is a new item
     // use a textarea to edit
 
+    const outsideAlertRef = useRef(null);
+    useOutsideAlerter(outsideAlertRef, () => setIsEditing(false));
+
     const { storage, list } = unit.learningGoals
 
     const [isEditing, setIsEditing] = useState(false)
@@ -47,7 +51,7 @@ const LearningGoals = ({ unitId, examId, unit, debouncedEdit, setChecked }: {
                 <Pencil1Icon className='h-5 w-5 z-10' onClick={() => setIsEditing(p => !p)} />
             </IconBar>
             {isEditing ?
-                <textarea defaultValue={storage} className='border w-full h-full'
+                <textarea ref={outsideAlertRef} defaultValue={storage} className='border w-full h-full'
                     onChange={(e) => debouncedEdit(unitId, e.target.value)}
                 />
                 : <CheckList

@@ -25,8 +25,6 @@ const ExamForm = ({ children, section, add }: { children: JSX.Element, section?:
         } as ExamFormType
     }
 
-    console.log("durationInHours: ", watch('durationInHours'))
-
     return (
         <Dialog title={'Exam form'} open={open} setOpen={setOpen} trigger={children || <Button>Add Section</Button>} >
             <Form css={{ paddingTop: 25, paddingBottom: 0 }} onSubmit={handleSubmit(async (values) => {
