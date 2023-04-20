@@ -52,7 +52,7 @@ const LearningGoals = ({ unitId, examId, unit, debouncedEdit, setChecked }: {
                     <textarea ref={outsideAlertRef} defaultValue={storage} className='border w-full h-full resize-none'
                         onChange={(e) => debouncedEdit(unitId, e.target.value)}
                     />
-                    <CheckCircledIcon className='absolute bottom-2 right-2' />
+                    <CheckCircledIcon className='absolute bottom-2 right-2 hover:text-green-600' />
                 </div>
                 : <CheckList
                     items={list.map(({ text, checked }) => ({ html: <div>{text}</div>, checked }))}
