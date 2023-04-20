@@ -43,6 +43,8 @@ export default function useForageIdArray<K, T>(
         if (!isValid(value)) throw new Error("invalid set value")
         const keyIndex = getKeyIndex(id)
         setItems(p => {
+            console.log("P", p)
+            console.log("P after", p.map((x, i) => i === keyIndex ? { ...x, value } : x))
             return p.map((x, i) => i === keyIndex ? { ...x, value } : x)
         })
         await localforage.setItem(id.toString(), value)
