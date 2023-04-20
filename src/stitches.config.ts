@@ -78,6 +78,7 @@ export const {
     },
     colors: {
       ...radixScales.blue,
+      ...radixScales.slate,
       border: '$borderWidths$medium solid $primary12',
       borderThin: '$borderWidths$thin solid $primary12',
       borderThick: '$borderWidths$thick solid $primary12',
@@ -87,6 +88,7 @@ export const {
       text: '$primary12',
 
       ...mapColor('blue', 'primary'),
+      ...mapColor('slate', 'gray'),
     },
     borderWidths: {
       thin: '1px',

@@ -9,7 +9,7 @@ function CheckList({ items, handleChecked }: {
         <ul>
             {items.map(({ html, checked }, index) => <li
                 key={index + checked.toString()}
-                style={checked ? { textDecoration: 'line-through', opacity: 0.7, color: "grey" } : {}}
+                style={checked ? { textDecoration: 'line-through', opacity: 0.7, color: "gray" } : {}}
             >
                 <Checkbox
                     onCheckedChange={async (checked: boolean) => {
