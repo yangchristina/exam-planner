@@ -2,6 +2,12 @@ import { hoursToMilliseconds, startOfHour } from "date-fns";
 import { nanoid } from "nanoid";
 import { z } from "zod";
 
+export interface Checkable {
+    checked: boolean;
+    [x: string]: any;
+}
+export type Progress = number // completed / total
+
 export const ExamFormSchema = z.object({
     id: z.string(),
     name: z.string(),

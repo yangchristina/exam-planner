@@ -10,12 +10,19 @@ import { useOutsideAlerter } from '@/hooks/useOutsideAlerter'
 import { Pencil1Icon } from '@radix-ui/react-icons'
 import CheckList from './CheckList'
 import { IconBar } from './Course'
+import { Checkable, Progress } from '@/types/Course'
 
 export const MIN_LINKS = 1
 export const EMPTY_LINK = { url: '', text: '', checked: false } as const
 
-const Links = () => {
-    const { item: links, set, isLoading } = useForageItem<Link[]>('links', isLinkList, [])
+const Links = ({ links, set }: { 
+    set: (value: {
+        url: string;
+        checked: boolean;
+        text?: string | undefined;
+    }[]) => Promise<void>,
+    links: Link[]
+ }) => {
 
     const [isEditing, setIsEditing] = useState(false)
 
@@ -26,17 +33,19 @@ const Links = () => {
         resolver: zodResolver(LinkListFormSchema)
     })
 
+    console.log("links", links.filter(x => x.checked).length / links.length)
+
     async function editChecked(index: number, checked: boolean) {
         console.log('checked o', checked, index)
         if (index < 0 || index >= links.length) return
-        await set(links.map((x, i) => i === index ? { ...x, checked } : x))
+        const newLinks = links.map((x, i) => i === index ? { ...x, checked } : x)
+        await set(newLinks)
     }
 
-    useEffect(() => {
-        reset({ links: fitMinSize([...links], 1, EMPTY_LINK, 'url') })
-    }, [isLoading])
-
-    console.log({ links })
+    // useEffect(() => {
+    //     const newLinks = fitMinSize([...links], 1, EMPTY_LINK, 'url')
+    //     reset({ links: newLinks })
+    // }, [isLoading])
 
     return (
         <div className='relative p-2 flex-1'>

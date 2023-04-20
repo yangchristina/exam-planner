@@ -4,6 +4,8 @@ import useForageItem from '@/hooks/useForageItem'
 import { Pencil1Icon } from '@radix-ui/react-icons'
 import { IconBar } from './Course'
 import { debounce } from 'lodash'
+import { Checkable } from '@/types/Course'
+import { FullUnit } from '@/types/Unit'
 
 function storageToList(para: string) {
     return para.split("\n").filter(Boolean).map((item) => {
@@ -22,24 +24,22 @@ function listToStorage(list: { checked: boolean, text: string }[]) {
     return list.map(({ checked, text }) => `${checked ? '1.' : '0.'} ${text}`).join("\n")
 }
 
-const LearningGoals = ({ unitId, examId }: { unitId: number, examId: string }) => {
+const LearningGoals = ({ unitId, examId, unit, debouncedEdit, setChecked }: {
+    unitId: number, examId: string, unit: FullUnit, debouncedEdit: any, setChecked: (id: number, index: number, checked: boolean) => void
+}) => {
     // every newline is a new item
     // use a textarea to edit
 
+    const { storage, list } = unit.learningGoals
+
     const [isEditing, setIsEditing] = useState(false)
-    const { item: paragraph, set, isLoading } = useForageItem(`${examId}-${unitId}-learningGoals`, (value: unknown) => typeof value === 'string', '')
+    // const { item: paragraph, set, isLoading } = useForageItem(`${examId}-${unitId}-learningGoals`, (value: unknown) => typeof value === 'string', '')
 
-    const [list, setList] = useState(storageToList(paragraph))
-    const storage = listToStorage(list)
-
-    const debouncedEdit = useCallback(debounce(async(para: string) => {
-        setList(storageToList(para))
-        await set(listToStorage(storageToList(para)))
-    }, 500), [])
-
-    useEffect(()=>{
-        setList(storageToList(paragraph))
-    }, [isLoading])
+    // useEffect(() => {
+    //     const list = storageToList(paragraph)
+    //     setList(list)
+    //     updateProgress(list)
+    // }, [isLoading])
 
     return (
         <div className='p-5 flex-1 overflow-y-auto text-xs' >
@@ -48,11 +48,14 @@ const LearningGoals = ({ unitId, examId }: { unitId: number, examId: string }) =
             </IconBar>
             {isEditing ?
                 <textarea defaultValue={storage} className='border w-full h-full'
-                    onChange={(e) => debouncedEdit(e.target.value)}
+                    onChange={(e) => debouncedEdit(unitId, e.target.value)}
                 />
                 : <CheckList
                     items={list.map(({ text, checked }) => ({ html: <div>{text}</div>, checked }))}
-                    handleChecked={console.log}
+                    handleChecked={async (index, checked) => {
+                        // const newList = list.map((item, i) => i === index ? { ...item, checked } : item)
+                        setChecked(unitId, index, checked)
+                    }}
                 />
             }
         </div>

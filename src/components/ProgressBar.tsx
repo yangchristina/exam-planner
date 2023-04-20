@@ -3,11 +3,11 @@ import React from 'react'
 import ItemProgress from './ItemProgress'
 
 //  SMALL (checklist) AND LARGE VERSIONS (course)
-const ProgressBar = () => {
+const ProgressBar = ({progress}: {progress: number}) => {
   return (
     <div className='bottom-0 w-full'>
       <End>
-        <Center><ItemProgress width={'90%'} progress={70} /></Center>
+        <Center><ItemProgress width={'90%'} progress={progress} /></Center>
       </End>
     </div>
   )

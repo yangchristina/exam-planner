@@ -25,7 +25,8 @@ const Checkbox = ({ defaultChecked, checked, onCheckedChange, id, css = {}, chil
                 size={size}
                 css={{
                     ...css,
-                    ...(colorNum !== undefined && { categoryColor: colorNum })
+                    ...(colorNum !== undefined && { categoryColor: colorNum }),
+                    minSize: 15,
                 }} checked={checked}
                 defaultChecked={defaultChecked}
                 onCheckedChange={onCheckedChange}
