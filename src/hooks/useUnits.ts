@@ -59,6 +59,7 @@ export default function useUnits(examId: string) {
         unitProgress: {},
         unitAverageProgress,
         setChecked,
+        renameUnit: (id: number, name: string) => setUnit(id, { ...unitMap[id], name }),
     }
 }
 

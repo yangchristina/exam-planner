@@ -36,7 +36,7 @@ const Course = ({ exam, removeExam }: { exam: Exam, removeExam: () => void }) =>
     const [mode, setMode] = useState(0)
     const { item: links, set, isLoading } = useForageItem<Link[]>(`${exam.id}-practiceExams`, isLinkList, [])
 
-    const { unitMap, addUnit, removeUnit, unitAverageProgress, setChecked, debouncedEditLearningGoals } = useUnits(exam.id)
+    const { unitMap, addUnit, removeUnit, unitAverageProgress, renameUnit, setChecked, debouncedEditLearningGoals } = useUnits(exam.id)
 
     const practiceExamProgress = links.length > 0 ? links.filter(x => x.checked).length / links.length : 0
     const decimalProgress = mode === 0 ?
@@ -54,7 +54,7 @@ const Course = ({ exam, removeExam }: { exam: Exam, removeExam: () => void }) =>
                     title={mode === 1 ? "Practice exams" : mode === 0 ? exam.name : "Learning Goals"}
                     subtitle={mode === 1 ? exam.name : mode > 2 ? unitMap[mode].name : undefined}
                 />
-            {mode === 0 ? <CourseUnitNav removeUnit={removeUnit} units={Object.values(unitMap)} addUnit={addUnit} setMode={setMode} />
+            {mode === 0 ? <CourseUnitNav renameUnit={renameUnit} removeUnit={removeUnit} units={Object.values(unitMap)} addUnit={addUnit} setMode={setMode} />
                 : mode === 1 ? <Links links={links} set={set} /> :
                     <LearningGoals debouncedEdit={debouncedEditLearningGoals} unit={unitMap[mode]} setChecked={setChecked} examId={exam.id} unitId={mode} />
             }

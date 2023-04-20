@@ -11,17 +11,18 @@ function getColorNum(i: number) {
 
 const Grid = styled('div', {})
 // TODO: Allow Delete Unit
-const CourseUnitNav = ({ setMode, units: items, addUnit, removeUnit }: {
+const CourseUnitNav = ({ setMode, units: items, addUnit, removeUnit, renameUnit }: {
     units: Unit[],
     setMode: React.Dispatch<React.SetStateAction<number>>,
     addUnit: (x: Unit) => void,
-    removeUnit: (id: any) => void
+    removeUnit: (id: any) => void,
+    renameUnit: (id: any, name: string) => void
 }) => {
     return (
         <div className="flex-1" >
             <Grid className="grid grid-cols-2" css={{ background: '$gray4' }} >
                 {
-                    items.map(({ id, name }, i) => <UnitButton removeUnit={() => removeUnit(id)} key={id} onClick={() => setMode(id)}
+                    items.map(({ id, name }, i) => <UnitButton renameUnit={(name: string)=>renameUnit(id, name)} removeUnit={() => removeUnit(id)} key={id} onClick={() => setMode(id)}
                         color={getColorNum(i)}>
                         {name}
                     </UnitButton>)

@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form'
 import { Unit, UnitSchema, isUnit } from '@/types/Unit'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { editForageObjectArray } from '@/utils/forage'
-import { CheckIcon, Pencil1Icon } from '@radix-ui/react-icons'
+import { CheckIcon, Pencil1Icon, TrashIcon } from '@radix-ui/react-icons'
 import ContextMenu from './ContextMenu'
 
 const style = {
@@ -39,9 +39,21 @@ export const NonUnitButton = styled("div", style)
 // interface Item extends Option {
 //   onSelect: () => void,
 // }
-const UnitButton = ({ children, color, onClick, removeUnit }: { children: ReactNode, color: 0 | 1, onClick: () => any, removeUnit: () => void }) => {
+const UnitButton = ({ children, color, onClick, removeUnit, renameUnit }: {
+  children: ReactNode, color: 0 | 1, onClick: () => any, removeUnit: () => void,
+  renameUnit: (name: string) => void
+}) => {
   return (
-    <ContextMenu units={[{ label: "Delete", rightSlot: <Pencil1Icon />, onSelect: () => window.confirm("Are you sure you want to delete?") && removeUnit() }]} >
+    <ContextMenu units={[
+      { label: "Delete", rightSlot: <TrashIcon />, onSelect: () => window.confirm("Are you sure you want to delete?") && removeUnit() },
+      {
+        label: "Rename", rightSlot: <Pencil1Icon />,
+        onSelect: () => {
+          const newName = window.prompt("Rename to?")
+          newName && renameUnit(newName)
+        }
+      },
+    ]} >
       <Button type={color} onClick={onClick} className={`h-10`} >{children}</Button>
     </ContextMenu>
   )
