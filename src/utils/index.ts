@@ -141,7 +141,7 @@ export function sum(arr: number[]) {
     return arr.reduce((a, b) => a + b, 0)
 }
 
-export function uniqBy<T>(a: T[], by: (x: T) => any) {
+export function uniqBy<T>(a: T[], by: (x: T) => any): T[] {
     return a.filter((value, index, array) => array.findIndex((x) => by(value) === by(x)) === index)
 }
 

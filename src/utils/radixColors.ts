@@ -1,7 +1,7 @@
 import * as radixScales from '@radix-ui/colors';
 import { Theme } from '@/stitches.config';
 
-const blackOverlay = {
+export const blackOverlay = {
     overlay1: radixScales.blackA.blackA1,
     overlay2: radixScales.blackA.blackA2,
     overlay3: radixScales.blackA.blackA3,
@@ -16,7 +16,7 @@ const blackOverlay = {
     overlay12: radixScales.blackA.blackA12,
 }
 
-const whiteOverlay = {
+export const whiteOverlay = {
     overlay1: radixScales.whiteA.whiteA1,
     overlay2: radixScales.whiteA.whiteA2,
     overlay3: radixScales.whiteA.whiteA3,

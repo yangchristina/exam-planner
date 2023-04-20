@@ -1,6 +1,6 @@
 import * as radixScales from '@radix-ui/colors';
 import { createStitches, PropertyValue } from '@stitches/react';
-import { createThemeColors, mapColor } from '@/utils/radixColors';
+import { blackOverlay, createThemeColors, mapColor } from '@/utils/radixColors';
 // { blackA, blue, blueDark, crimson, crimsonA, crimsonDark, crimsonDarkA, gray, grayDark, green, greenDark, mauve, mauveDark, pink, pinkDark, red, redDark, sage, sageDark, teal, tealDark, whiteA, yellow, yellowDark }
 // to understand color scale: https://www.radix-ui.com/docs/colors/palette-composition/understanding-the-scale
 
@@ -79,6 +79,7 @@ export const {
     colors: {
       ...radixScales.blue,
       ...radixScales.slate,
+      ...blackOverlay,
       border: '$borderWidths$medium solid $primary12',
       borderThin: '$borderWidths$thin solid $primary12',
       borderThick: '$borderWidths$thick solid $primary12',

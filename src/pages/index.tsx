@@ -4,6 +4,8 @@ import Course from '@/components/Course'
 import Timegrid from '@/features/calendars/timegrid'
 import { startOfToday } from 'date-fns'
 import { styled } from '@/stitches.config'
+import { PlusCircledIcon, PlusIcon } from '@radix-ui/react-icons'
+import ExamForm from '@/features/category/ExamForm'
 
 const Page = styled('div', {
   height: "100vh",
@@ -46,6 +48,9 @@ export default function Home() {
         <Course />
         <Course />
         <Course />
+        <ExamForm>
+          <PlusCircledIcon className='absolute top-3 right-3 h-5 w-5' />
+        </ExamForm>
       </div>
     </Page>
   )
