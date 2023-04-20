@@ -31,7 +31,6 @@ export default function useForageArray<T>(
         await setArray([...array, value])
     }
 
-
     async function remove(index: number) {
         await setArray(array.filter((_, i) => i !== index))
     }

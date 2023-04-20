@@ -4,14 +4,14 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import React, { Dispatch, SetStateAction, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { ButtonsBar, ErrorText, Form } from './styles'
-import { Exam, ExamForm, ExamFormSchema, ExamSchema, convertExamFormToExam, convertExamToExamForm, generateNewExam, generateNewExamForm } from '@/types/Course'
+import { Exam, ExamForm as ExamFormType, ExamFormSchema, ExamSchema, convertExamFormToExam, convertExamToExamForm, generateNewExam, generateNewExamForm } from '@/types/Course'
 import { DateTimePicker } from '@mantine/dates';
 import localforage from 'localforage'
 import { isExam } from '@/types/Course'
 import { uniqBy } from '@/utils'
 import { editForageObjectArray } from '@/utils/forage'
 
-const ExamForm = ({ children, section }: { children: JSX.Element, section?: Exam, }) => {
+const ExamForm = ({ children, section, add }: { children: JSX.Element, section?: Exam, add?: (x: Exam) => void }) => {
     const [open, setOpen] = useState(false)
     const { handleSubmit, register, reset, control, watch, formState: { errors, isSubmitting } } = useForm({
         defaultValues: formDefaults(),
@@ -22,7 +22,7 @@ const ExamForm = ({ children, section }: { children: JSX.Element, section?: Exam
         return {
             ...generateNewExamForm(),
             ...(section ? convertExamToExamForm(section) : {})
-        } as ExamForm
+        } as ExamFormType
     }
 
     console.log("durationInHours: ", watch('durationInHours'))
@@ -33,7 +33,7 @@ const ExamForm = ({ children, section }: { children: JSX.Element, section?: Exam
                 const newExam = convertExamFormToExam(values)
                 setOpen(false)
                 reset(formDefaults())
-                editForageObjectArray<Exam>('exams', newExam, isExam, 'id')
+                add ? add(newExam) : editForageObjectArray<Exam>('exams', newExam, isExam, 'id')
             })} >
                 <Input {...register('name')} placeholder='ex. CPSC 310' title='Section name:' label={'Name:'} >
                     {errors.name?.message && <ErrorText>{errors.name?.message}</ErrorText>}

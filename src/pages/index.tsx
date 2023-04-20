@@ -29,7 +29,7 @@ const Page = styled('div', {
 
 
 export default function Home() {
-  const { items, remove } = useForageArray<Exam>('exams', isExam)
+  const { items, remove, add } = useForageArray<Exam>('exams', isExam)
   const stub = () => {
     console.log('stub')
   }
@@ -55,7 +55,7 @@ export default function Home() {
           items.map((exam, i) => <Course key={i} exam={exam} removeExam={()=>remove(i)} />)
         }
       </div> : <div className='text-xl m-auto' >Add an exam to start (top right corner)</div>}
-        <ExamForm>
+        <ExamForm add={add}>
           <PlusCircledIcon className='absolute top-3 right-3 h-5 w-5' />
         </ExamForm>
     </Page>
