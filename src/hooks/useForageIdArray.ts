@@ -44,6 +44,7 @@ export default function useForageIdArray<K, T>(
         const keyIndex = getKeyIndex(id)
         setItems(p => {
             console.log("P", p)
+            console.log("keyIndex", keyIndex, id)
             console.log("P after", p.map((x, i) => i === keyIndex ? { ...x, value } : x))
             return p.map((x, i) => i === keyIndex ? { ...x, value } : x)
         })
