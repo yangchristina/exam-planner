@@ -9,6 +9,7 @@ import { DateTimePicker } from '@mantine/dates';
 import localforage from 'localforage'
 import { isExam } from '@/types/Course'
 import { uniqBy } from '@/utils'
+import { editForageObjectArray } from '@/utils/forage'
 
 const ExamForm = ({ children, section }: { children: JSX.Element, section?: Exam, }) => {
     const [open, setOpen] = useState(false)
@@ -32,15 +33,7 @@ const ExamForm = ({ children, section }: { children: JSX.Element, section?: Exam
                 const newExam = convertExamFormToExam(values)
                 setOpen(false)
                 reset(formDefaults())
-                let data = await localforage.getItem('exams')
-                let exams: Exam[] = Array.isArray(data) ? data.filter(isExam) as Exam[] : []
-                const index = uniqBy(exams, (x) => x.id).findIndex(x => x.id === newExam.id)
-                if (-1 !== index) {
-                    exams[index] = newExam
-                } else {
-                    exams = [...exams, newExam]
-                }
-                localforage.setItem('exams', exams)
+                editForageObjectArray<Exam>('exams', newExam, isExam, 'id')
             })} >
                 <Input {...register('name')} placeholder='ex. CPSC 310' title='Section name:' label={'Name:'} >
                     {errors.name?.message && <ErrorText>{errors.name?.message}</ErrorText>}

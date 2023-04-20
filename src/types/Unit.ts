@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const UnitSchema = z.object({
     id: z.number(),
-    name: z.string()
+    name: z.string().min(1)
 })
 
 export type Unit = z.infer<typeof UnitSchema>

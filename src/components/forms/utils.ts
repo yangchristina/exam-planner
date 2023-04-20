@@ -1,5 +1,9 @@
 import { cloneDeep } from "lodash"
 
+export function generateNumberId(): number {
+    return new Date().valueOf();
+}
+
 export function fitMinSize<T>(array: T[], minSize: number, empty: T, keyBy?: keyof T) {
     const cur = cloneDeep(array)
     const toAdd = minSize - cur.length
