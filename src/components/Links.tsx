@@ -34,7 +34,6 @@ const Links = ({ links, set }: {
     })
 
     async function editChecked(index: number, checked: boolean) {
-        console.log('checked o', checked, index)
         if (index < 0 || index >= links.length) return
         const newLinks = links.map((x, i) => i === index ? { ...x, checked } : x)
         await set(newLinks)

@@ -39,7 +39,6 @@ export default function useUnits(examId: string) {
         const list = storageToList(para)
         const storage = listToStorage(list)
         unitMap[unitId].learningGoals = { storage, list, progress: list.filter(({ checked }) => checked).length / list.length, }
-        console.log("stro CALLLED", storage)
         setLearningGoals(unitId, storage)
     }, 500), [keyValueItems])
 
@@ -47,7 +46,6 @@ export default function useUnits(examId: string) {
         const list = unitMap[id].learningGoals.list
         list[index].checked = checked
         const storage = listToStorage(list)
-        console.log("CHECKED CALLLED", storage)
         setLearningGoals(id, storage)
         // unitMap[id].learningGoals = { storage, list, progress: list.filter(({ checked }) => checked).length / list.length, }
     }

@@ -13,7 +13,6 @@ function CheckList({ items, handleChecked }: {
             >
                 <Checkbox
                     onCheckedChange={async (checked: boolean) => {
-                        console.log('checked', checked, index)
                         handleChecked(index, !!checked)
                     }}
                     defaultChecked={!!checked} icon={'clear'} >

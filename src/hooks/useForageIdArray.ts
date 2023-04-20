@@ -42,7 +42,6 @@ export default function useForageIdArray<K, T>(
     }
 
     async function setValue(id: any, value: T) {
-        console.log("IN SET VALUE", id, value)
         if (!isValid(value)) throw new Error("invalid set value")
         const keyIndex = getKeyIndex(id)
         setItems(p => {

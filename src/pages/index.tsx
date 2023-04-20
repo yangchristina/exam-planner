@@ -1,5 +1,3 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
 import Course from '@/components/Course'
 import Timegrid, { MS_PER_DAY } from '@/features/calendars/timegrid'
 import { startOfToday } from 'date-fns'
@@ -29,12 +27,14 @@ const Page = styled('div', {
 
 
 export default function Home() {
-  const { items, remove, add } = useForageArray<Exam>('exams', isExam)
+  const { items, remove, add, isLoading } = useForageArray<Exam>('exams', isExam)
   const stub = () => {
     console.log('stub')
   }
 
   const [date, setDate] = useState(startOfToday().getTime())
+
+  if (isLoading) return <div>Is Loading...</div>
 
   return (
     <Page>

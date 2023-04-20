@@ -13,7 +13,6 @@ export function fitMinSize<T>(array: T[], minSize: number, empty: T, keyBy?: key
     }
 
     if (keyBy && cur[cur.length - 1][keyBy]) {
-        console.log("IN FIT")
         cur.push({ ...empty })
     }
     return cur

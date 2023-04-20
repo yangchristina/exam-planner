@@ -40,7 +40,6 @@ export default function useForageSortedArray<T>(
             for (const key of order) {
                 const item = await localforage.getItem(groupKey + '-' + key)
                 if (!isValid(item)) {
-                    console.log(item)
                     remove(key)
                     // throw new Error("invalid item")
                 }
