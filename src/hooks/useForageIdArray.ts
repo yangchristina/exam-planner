@@ -4,6 +4,7 @@ import useForageItem from "./useForageItem"
 import { isStringArray } from "@/utils"
 import useForageArray from "./useForageArray"
 import { editForageObjectArray } from "@/utils/forage"
+import { uniqBy } from "lodash"
 
 export type UniqueIdentifier = string | number
 export default function useForageIdArray<K, T>(
@@ -14,7 +15,7 @@ export default function useForageIdArray<K, T>(
     keyBy?: keyof K
 ) {
     const defaultArray: { key: K, value: T }[] = []
-    const { items: keys, isLoading: isLoadingKeys, set: setKeyV, add: addKey, remove: removeKeyV } = useForageArray<K>(
+    const { items: keys, isLoading: isLoadingKeys, set: setKeyV, add: addKey, remove: removeKeyV, setEntire } = useForageArray<K>(
         key,
         isValidKey,
         []
@@ -25,11 +26,13 @@ export default function useForageIdArray<K, T>(
 
     useEffect(() => {
         async function init() {
+            if (uniqBy(keys, x => keyBy ? x[keyBy] : x).length !== keys.length) {
+                setEntire(uniqBy(keys, x => keyBy ? x[keyBy] : x))
+            }
             const items = await Promise.all(keys.map(async (key) => localforage.getItem(((keyBy ? key[keyBy] : key) as number | string).toString())))
             const validItems = items.map(x=>isValid(x) ? x : defaultValue) as T[]
             setItems(validItems.map((x, i) => ({ key: keys[i], value: x })))
             setIsLoading(false)
-            console.log("in init", {items, validItems, keys})
         }
         if (!isLoadingKeys) init()
     }, [isLoadingKeys, keys])
@@ -43,14 +46,9 @@ export default function useForageIdArray<K, T>(
         if (!isValid(value)) throw new Error("invalid set value")
         const keyIndex = getKeyIndex(id)
         setItems(p => {
-            console.log("P", p)
-            console.log("keyIndex", keyIndex, id)
-            console.log("P after", p.map((x, i) => i === keyIndex ? { ...x, value } : x))
             return p.map((x, i) => i === keyIndex ? { ...x, value } : x)
         })
         await localforage.setItem(id.toString(), value)
-        console.log("IN SET VALUE DONE", id, value)
-        console.log(await localforage.getItem(id))
     }
 
     async function setKey(id: any, key: K) {
