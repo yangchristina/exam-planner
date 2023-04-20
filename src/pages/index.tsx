@@ -1,13 +1,14 @@
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import Course from '@/components/Course'
-import Timegrid from '@/features/calendars/timegrid'
+import Timegrid, { MS_PER_DAY } from '@/features/calendars/timegrid'
 import { startOfToday } from 'date-fns'
 import { styled } from '@/stitches.config'
-import { PlusCircledIcon, PlusIcon } from '@radix-ui/react-icons'
+import { ChevronLeftIcon, ChevronRightIcon, PlusCircledIcon, PlusIcon } from '@radix-ui/react-icons'
 import ExamForm from '@/features/category/ExamForm'
 import useForageArray from '@/hooks/useForageArray'
 import { Exam, isExam } from '@/types/Course'
+import { useState } from 'react'
 
 const Page = styled('div', {
   height: "100vh",
@@ -32,17 +33,22 @@ export default function Home() {
   const stub = () => {
     console.log('stub')
   }
+
+  const [date, setDate] = useState(startOfToday().getTime())
+
   return (
     <Page>
       <Timegrid
         containerCss={{ padding: '20px 0px 0px 20px' }}
-        firstDay={startOfToday().getTime()}
+        firstDay={date}
         days={1}
-        data={[]}
+        data={items}
         handleAddItem={stub}
         handleDoubleClickDate={stub}
         // contextMenu={(item, calendarItem) => stub()} // NOTE: difference between Item and Calendar item is name not requried in TemplateRecur
         handleDateChange={stub}
+        labelLeft={<ChevronLeftIcon onClick={()=>setDate(p=>p-MS_PER_DAY)} />}
+        labelRight={<ChevronRightIcon onClick={()=>setDate(p=>p+MS_PER_DAY)} />}
       />
       {items.length > 0 ? <div className='overflow-auto flex flex-wrap p-8 gap-y-6' >
         {
