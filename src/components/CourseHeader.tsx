@@ -2,12 +2,13 @@ import { Exam } from '@/types/Course'
 import { differenceInCalendarDays, format } from 'date-fns'
 import React from 'react'
 import ContextMenu from './ContextMenu'
-import { TrashIcon } from '@radix-ui/react-icons'
+import { ResetIcon, TrashIcon } from '@radix-ui/react-icons'
 
-const CourseHeader = ({ title, setMode, exam, subtitle, removeExam }: { 
+const CourseHeader = ({ title, setMode, exam, subtitle, removeExam, mode }: {
   setMode: React.Dispatch<React.SetStateAction<number>>, title?: string, exam: Exam, subtitle?: string
-  removeExam: () => void
- }) => {
+  removeExam: () => void,
+  mode: number
+}) => {
   return (
     <ContextMenu units={[{
       label: 'Delete',
@@ -19,7 +20,12 @@ const CourseHeader = ({ title, setMode, exam, subtitle, removeExam }: {
           {differenceInCalendarDays(exam.dateStart, new Date())}
         </div>
         {subtitle && <h3 className='text-slate-500 text-xs text-center mx-auto absolute top-0 left-0 right-0 mt-2 underline'>{subtitle}</h3>}
-        <h1 onClick={() => setMode(0)} className='text-xl text-center mx-auto'>{title || 'CPSC 320'}</h1>
+        <h1 onClick={() => setMode(0)} className='text-xl text-center mx-auto relative'>
+          <span className='relative'>
+            {mode !== 0 && <ResetIcon onClick={() => setMode(0)} className='absolute -left-6 my-auto top-0 bottom-0 w-4 h-4 text-slate-500' />}
+            {title}
+          </span>
+        </h1>
         <div className='absolute bottom-2 right-2 text-sm	'>
           <u>
             Exam date
