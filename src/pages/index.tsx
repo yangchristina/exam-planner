@@ -6,6 +6,8 @@ import { startOfToday } from 'date-fns'
 import { styled } from '@/stitches.config'
 import { PlusCircledIcon, PlusIcon } from '@radix-ui/react-icons'
 import ExamForm from '@/features/category/ExamForm'
+import useForageArray from '@/hooks/useForageArray'
+import { Exam, isExam } from '@/types/Course'
 
 const Page = styled('div', {
   height: "100vh",
@@ -26,11 +28,11 @@ const Page = styled('div', {
 
 
 export default function Home() {
+  const { items } = useForageArray<Exam>('exams', isExam)
   const stub = () => {
     console.log('stub')
   }
   return (
-
     <Page>
       <Timegrid
         containerCss={{ padding: '20px 0px 0px 20px' }}
@@ -42,16 +44,14 @@ export default function Home() {
         // contextMenu={(item, calendarItem) => stub()} // NOTE: difference between Item and Calendar item is name not requried in TemplateRecur
         handleDateChange={stub}
       />
-      <div className='overflow-auto flex flex-wrap p-8 gap-y-6' >
-        <Course />
-        <Course />
-        <Course />
-        <Course />
-        <Course />
+      {items.length > 0 ? <div className='overflow-auto flex flex-wrap p-8 gap-y-6' >
+        {
+          items.map((exam, i) => <Course key={i} exam={exam} />)
+        }
+      </div> : <div className='text-xl m-auto' >Add an exam to start (top right corner)</div>}
         <ExamForm>
           <PlusCircledIcon className='absolute top-3 right-3 h-5 w-5' />
         </ExamForm>
-      </div>
     </Page>
   )
 }

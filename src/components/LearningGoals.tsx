@@ -22,12 +22,12 @@ function listToStorage(list: { checked: boolean, text: string }[]) {
     return list.map(({ checked, text }) => `${checked ? '1.' : '0.'} ${text}`).join("\n")
 }
 
-const LearningGoals = ({ unitId }: { unitId: number }) => {
+const LearningGoals = ({ unitId, examId }: { unitId: number, examId: string }) => {
     // every newline is a new item
     // use a textarea to edit
 
     const [isEditing, setIsEditing] = useState(false)
-    const { item: paragraph, set, isLoading } = useForageItem(unitId + 'learningGoals', (value: unknown) => typeof value === 'string', '')
+    const { item: paragraph, set, isLoading } = useForageItem(`${examId}-${unitId}-learningGoals`, (value: unknown) => typeof value === 'string', '')
 
     const [list, setList] = useState(storageToList(paragraph))
     const storage = listToStorage(list)

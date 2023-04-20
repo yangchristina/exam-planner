@@ -32,7 +32,6 @@ const ExamForm = ({ children, section }: { children: JSX.Element, section?: Exam
                 const newExam = convertExamFormToExam(values)
                 setOpen(false)
                 reset(formDefaults())
-                localforage.setItem(values.id, newExam)
                 let data = await localforage.getItem('exams')
                 let exams: Exam[] = Array.isArray(data) ? data.filter(isExam) as Exam[] : []
                 const index = uniqBy(exams, (x) => x.id).findIndex(x => x.id === newExam.id)
@@ -52,7 +51,6 @@ const ExamForm = ({ children, section }: { children: JSX.Element, section?: Exam
                     control={control}
                     render={({ field }) => <DateTimePicker {...field} error={errors.dateStart?.message} />}
                 />
-
 
                 <Input {...register('durationInHours')} type='number' min={0.5} max={999} step={0.5} placeholder='(in hrs)' title='Duration' label={'Duration (hrs):'} >
                     {errors.durationInHours?.message && <ErrorText>{errors.durationInHours?.message}</ErrorText>}
