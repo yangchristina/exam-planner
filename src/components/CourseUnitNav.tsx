@@ -14,14 +14,14 @@ const Grid = styled('div', {})
 const CourseUnitNav = ({ setMode, units: items, addUnit, removeUnit }: {
     units: Unit[],
     setMode: React.Dispatch<React.SetStateAction<number>>,
-    addUnit: (x: Unit)=>void,
-    removeUnit: (id: any)=>void
+    addUnit: (x: Unit) => void,
+    removeUnit: (id: any) => void
 }) => {
     return (
         <div className="flex-1" >
-            <Grid className="grid grid-cols-2" css={{background: '$gray4'}} >
+            <Grid className="grid grid-cols-2" css={{ background: '$gray4' }} >
                 {
-                    items.map(({ id, name }, i) => <UnitButton removeUnit={()=>removeUnit(id)} key={id} onClick={() => setMode(id)}
+                    items.map(({ id, name }, i) => <UnitButton removeUnit={() => removeUnit(id)} key={id} onClick={() => setMode(id)}
                         color={getColorNum(i)}>
                         {name}
                     </UnitButton>)
