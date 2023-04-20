@@ -41,7 +41,7 @@ const Course = ({ exam }: { exam: Exam }) => {
 
     const practiceExamProgress = links.length > 0 ? links.filter(x => x.checked).length / links.length : 0
     const decimalProgress = mode === 0 ?
-        weightedAverage([unitAverageProgress || 0, practiceExamProgress], links.length > 0 && unitAverageProgress ? [0.5, 0.5] :  links.length > 0 ? [0, 1] : [1, 0])
+        weightedAverage([unitAverageProgress || 0, practiceExamProgress], links.length > 0 && unitAverageProgress ? [0.5, 0.5] : links.length > 0 ? [0, 1] : [1, 0])
         : mode === 1 ? practiceExamProgress
             : (unitMap[mode].learningGoals.progress || 0)
     const progress = decimalProgress * 100
@@ -50,7 +50,10 @@ const Course = ({ exam }: { exam: Exam }) => {
 
     return (
         <div className="relative w-96 h-96 mx-auto bg-white rounded-xl shadow-lg flex flex-col items-stretch border-2" >
-            <CourseHeader exam={exam} setMode={setMode} title={mode === 1 ? "Practice exams" : mode === 0 ? exam.name : "Learning Goals"} />
+            <CourseHeader exam={exam} setMode={setMode}
+                title={mode === 1 ? "Practice exams" : mode === 0 ? exam.name : "Learning Goals"}
+                subtitle={mode === 1 ? exam.name : mode > 2 ? unitMap[mode].name : undefined}
+            />
             {mode === 0 ? <CourseUnitNav removeUnit={removeUnit} units={Object.values(unitMap)} addUnit={addUnit} setMode={setMode} />
                 : mode === 1 ? <Links links={links} set={set} /> :
                     <LearningGoals debouncedEdit={debouncedEditLearningGoals} unit={unitMap[mode]} setChecked={setChecked} examId={exam.id} unitId={mode} />
