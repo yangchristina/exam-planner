@@ -9,6 +9,7 @@ import useForageItem from '@/hooks/useForageItem'
 import { useOutsideAlerter } from '@/hooks/useOutsideAlerter'
 import { Pencil1Icon } from '@radix-ui/react-icons'
 import CheckList from './CheckList'
+import { IconBar } from './Course'
 
 export const MIN_LINKS = 1
 export const EMPTY_LINK = { url: '', text: '', checked: false } as const
@@ -38,7 +39,7 @@ const Links = () => {
     console.log({ links })
 
     return (
-        <div className='relative p-2'>
+        <div className='relative p-2 flex-1'>
             <form onSubmit={handleSubmit(async (values, e) => { setIsEditing(false); await set(values.links) })}>
                 <LinkArea css={{ fontSize: '0.95em' }} >
                     <IconBar>
@@ -80,12 +81,4 @@ const LinkArea = styled('div', {
     position: 'relative',
     gap: 10
     // marginInline: 'auto',
-})
-
-
-const IconBar = styled('span', {
-    display: 'flex',
-    marginRight: '1rem',
-    right: 0,
-    position: 'absolute'
 })

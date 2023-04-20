@@ -5,7 +5,7 @@ import ItemProgress from './ItemProgress'
 //  SMALL (checklist) AND LARGE VERSIONS (course)
 const ProgressBar = () => {
   return (
-    <div className='absolute bottom-0 w-full'>
+    <div className='bottom-0 w-full'>
       <End>
         <Center><ItemProgress width={'90%'} progress={70} /></Center>
       </End>

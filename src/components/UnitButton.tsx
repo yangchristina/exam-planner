@@ -6,7 +6,7 @@ const Button = styled("button", {
   variants: {
     type: {
       0: {
-        background: '$gray1'
+        // background: '$gray1'
       },
       1: {
         background: '$gray4'
@@ -15,9 +15,9 @@ const Button = styled("button", {
   }
 })
 
-const UnitButton = ({ children, color }: { children: ReactNode, color: 0 | 1 }) => {
+const UnitButton = ({ children, color, onClick }: { children: ReactNode, color: 0 | 1, onClick: ()=>any }) => {
   return (
-    <Button type={color} className={`h-10`} >{children}</Button>
+    <Button type={color} onClick={onClick} className={`h-10`} >{children}</Button>
   )
 }
 
