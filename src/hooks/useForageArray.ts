@@ -22,6 +22,10 @@ export default function useForageArray<T>(
         await setArray(array.map((x, i) => i === index ? value : x))
     }
 
+    async function setEntire(value: T[]) {
+        await setArray(value)
+    }
+
     async function add(value: T) {
         if (!isValid(value)) throw new Error("invalid set value")
         await setArray([...array, value])
@@ -38,6 +42,7 @@ export default function useForageArray<T>(
         clear,
         add, 
         remove,
-        items: array
+        items: array,
+        setEntire
     }
 }

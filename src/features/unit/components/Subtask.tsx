@@ -8,6 +8,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import Checkbox from '@/components/Checkbox'
 import InputLabel from '@/components/InputLabel'
 import useChecklist from '../useChecklist'
+import { BulletInputsLineWrapper, FloatableInput } from '@/components/InputList'
+import { ErrorMessage } from '@hookform/error-message'
 
 const IconBar = styled('span', {
     display: 'flex',
@@ -34,6 +36,7 @@ const AddSubtaskTrigger = styled('div', {
     flexGeneral: 'row',
     justifyContent: 'end',
     marginLeft: 'auto',
+    marginRight: '1rem',
     marginTop: '0.3rem',
     width: 'max-content',
     '&:hover': {
@@ -47,7 +50,7 @@ const Flex = styled('div', {
     width: 'stretch'
 })
 
-const SubtaskRenameable = ({ index, itemId, subtask }: { index?: number, subtask?: SubtaskType, itemId: string }) => {
+const SubtaskRenameable = ({ index, subtask, type = "text" }: { index?: number, subtask?: SubtaskType, type?: string }) => {
     const [isEditing, setIsEditing] = useState(false)
     const outsideAlertRef = useRef(null);
     const { toggleSubtaskCompleted, removeSubtask, renameSubtask, addSubtask } = useChecklist()

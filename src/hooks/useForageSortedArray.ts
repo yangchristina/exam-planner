@@ -1,4 +1,3 @@
-import { FilterCondition, isFilterCondition } from "@/types"
 import { isStringArray } from "@/utils"
 import localforage from "localforage"
 import { Dispatch, SetStateAction, useEffect, useState } from "react"

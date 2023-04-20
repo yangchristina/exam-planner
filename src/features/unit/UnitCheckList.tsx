@@ -1,8 +1,11 @@
 import React from 'react'
+import Subtasks from './components/Subtasks'
+import useChecklist from './useChecklist'
 
 const UnitCheckList = () => {
+  const { items } = useChecklist()
   return (
-    <div>UnitCheckList</div>
+    <Subtasks subtasks={items} />
   )
 }
 

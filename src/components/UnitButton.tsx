@@ -1,8 +1,8 @@
 import React, { ReactNode } from 'react'
 
-const UnitButton = ({children}: {children: ReactNode}) => {
+const UnitButton = ({ children, color }: { children: ReactNode, color: 0 | 1 }) => {
   return (
-    <button style={{all: 'unset'}} className='' >{children}</button>
+    <button className={`h-10 bg-slate-${color ? 200: 100}`} >{children}</button>
   )
 }
 

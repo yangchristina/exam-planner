@@ -8,7 +8,6 @@ export default class Document extends NextDocument {
       <Html lang="en">
         <Head>
           <style id="stitches" dangerouslySetInnerHTML={{ __html: getCssText() }} />
-          <link rel="preload" href="/api/main/category" as="fetch" crossOrigin="anonymous" />
         </Head>
         <body>
           <Main />

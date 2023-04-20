@@ -25,7 +25,8 @@ export default function useChecklist() {
         removeSubtask: remove,
         renameSubtask,
         addSubtask,
-        clear
+        clear,
+        items
     }
 }
 

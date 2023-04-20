@@ -25,16 +25,16 @@ const AddSubtaskTrigger = styled('div', {
     },
 })
 
-const Subtasks = ({ subtasks, itemId }: { subtasks: SubtaskType[], itemId: string}) => {
+const Subtasks = ({ subtasks }: { subtasks: SubtaskType[]}) => {
 
     return (
         <Container>
             <SubtaskList >
                 {subtasks?.map((subtask, i) => (
-                    <Subtask key={i} itemId={itemId} subtask={subtask} index={i} />
+                    <Subtask key={i} subtask={subtask} index={i} />
                 ))}
 
-                    <Subtask itemId={itemId} />
+                    <Subtask />
             </SubtaskList>
         </Container>
     )
