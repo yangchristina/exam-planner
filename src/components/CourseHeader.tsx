@@ -1,8 +1,8 @@
 import { Exam } from '@/types/Course'
 import { differenceInCalendarDays, format } from 'date-fns'
 import React from 'react'
-import ContextMenu from './ContextMenu'
-import { ResetIcon, TrashIcon } from '@radix-ui/react-icons'
+import { ResetIcon } from '@radix-ui/react-icons'
+import CourseContextMenu from './CourseContextMenu'
 
 const CourseHeader = ({ title, setMode, exam, subtitle, removeExam, mode }: {
   setMode: React.Dispatch<React.SetStateAction<number>>, title?: string, exam: Exam, subtitle?: string
@@ -10,11 +10,7 @@ const CourseHeader = ({ title, setMode, exam, subtitle, removeExam, mode }: {
   mode: number
 }) => {
   return (
-    <ContextMenu units={[{
-      label: 'Delete',
-      rightSlot: <TrashIcon />,
-      onSelect: () => window.confirm("Are you sure you want to delete this exam?") && removeExam()
-    }]}>
+    <CourseContextMenu removeExam={removeExam}>
       <div className={`h-16 pt-6 pb-2 bg-sky-100 relative`} >
         <div className='h-10 w-10 bg-amber-50	absolute top-2 left-2 rounded-md flex items-center justify-center text-lg	border border-black'>
           {differenceInCalendarDays(exam.dateStart, new Date())}
@@ -34,7 +30,7 @@ const CourseHeader = ({ title, setMode, exam, subtitle, removeExam, mode }: {
           {format(exam.dateStart, 'MMMM d')}
         </div>
       </div>
-    </ContextMenu>
+    </CourseContextMenu>
   )
 }
 

@@ -1,10 +1,7 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import CheckList from './CheckList'
-import useForageItem from '@/hooks/useForageItem'
 import { Pencil1Icon } from '@radix-ui/react-icons'
 import { IconBar } from './Course'
-import { debounce } from 'lodash'
-import { Checkable } from '@/types/Course'
 import { FullUnit } from '@/types/Unit'
 import { useOutsideAlerter } from '@/hooks/useOutsideAlerter'
 

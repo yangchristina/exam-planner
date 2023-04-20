@@ -7,11 +7,10 @@ import LearningGoals from './LearningGoals'
 import { styled } from '@/stitches.config'
 import { Exam } from '@/types/Course'
 import { Cross1Icon } from '@radix-ui/react-icons'
-import { sum } from 'lodash'
 import useForageItem from '@/hooks/useForageItem'
 import { Link, isLinkList } from '@/types/Link'
-import useForageIdArray from '@/hooks/useForageIdArray'
 import useUnits from '@/hooks/useUnits'
+import CourseContextMenu from './CourseContextMenu'
 
 const Overlay = styled(Cross1Icon, {
     background: "$overlay9",
@@ -50,17 +49,20 @@ const Course = ({ exam, removeExam }: { exam: Exam, removeExam: () => void }) =>
 
     return (
         <div className="relative w-96 h-96 mx-auto bg-white rounded-xl shadow-lg flex flex-col items-stretch border-2" >
-            <CourseHeader mode={mode} exam={exam} setMode={setMode}
-                removeExam={removeExam}
-                title={mode === 1 ? "Practice exams" : mode === 0 ? exam.name : "Learning Goals"}
-                subtitle={mode === 1 ? exam.name : mode > 2 ? unitMap[mode].name : undefined}
-            />
+                <CourseHeader mode={mode} exam={exam} setMode={setMode}
+                    removeExam={removeExam}
+                    title={mode === 1 ? "Practice exams" : mode === 0 ? exam.name : "Learning Goals"}
+                    subtitle={mode === 1 ? exam.name : mode > 2 ? unitMap[mode].name : undefined}
+                />
             {mode === 0 ? <CourseUnitNav removeUnit={removeUnit} units={Object.values(unitMap)} addUnit={addUnit} setMode={setMode} />
                 : mode === 1 ? <Links links={links} set={set} /> :
                     <LearningGoals debouncedEdit={debouncedEditLearningGoals} unit={unitMap[mode]} setChecked={setChecked} examId={exam.id} unitId={mode} />
             }
             <ProgressBar progress={progress} />
-            {isFinished && <Overlay className='absolute w-full h-full' />}
+            {isFinished && <CourseContextMenu removeExam={removeExam}>
+                <Overlay className='absolute w-full h-full' />
+            </CourseContextMenu>
+            }
         </div>
     )
 
