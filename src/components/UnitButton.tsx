@@ -6,14 +6,15 @@ import { generateNumberId } from './forms/utils'
 import { useForm } from 'react-hook-form'
 import { Unit, UnitSchema, isUnit } from '@/types/Unit'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { editForageObjectArray } from '@/utils/forage'
 import { CheckIcon, Pencil1Icon, TrashIcon } from '@radix-ui/react-icons'
 import ContextMenu from './ContextMenu'
 
 const style = {
   background: '',
   '&:hover': {
-    opacity: 0.5
+    '&:not(&:focus-within)': {
+      opacity: 0.5
+    }
   },
   variants: {
     type: {
