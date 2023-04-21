@@ -55,7 +55,7 @@ const UnitButton = ({ children, color, onClick, removeUnit, renameUnit }: {
         }
       },
     ]} >
-      <Button type={color} onClick={onClick} className={`h-10`} >{children}</Button>
+      <Button title='Unit' type={color} onClick={onClick} className={`h-10`} >{children}</Button>
     </ContextMenu>
   )
 }
@@ -79,7 +79,7 @@ export const AddUnitButton = ({ color, add }: { color: 0 | 1, add: (x: Unit) => 
   //   // localforage.setItem(`${examId}-units`, { name, id: generateNumberId() })
   // }, 500), [])
 
-  return <NonUnitButton className={`h-10 flex items-center justify-center`} type={color}
+  return <NonUnitButton title='Add Unit' className={`h-10 flex items-center justify-center`} type={color}
     onClick={() => setIsEditing(true)}
   >
     {isEditing ? <form className='flex p-1' ref={outsideAlertRef} onSubmit={handleSubmit(async (newItem) => {
