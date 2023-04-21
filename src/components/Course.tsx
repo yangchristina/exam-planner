@@ -75,8 +75,8 @@ const Course = ({ exam, removeExam }: { exam: Exam, removeExam: () => void }) =>
                 }
                 {mode > 2 && <ChevronRightIcon onClick={() => setMode(p => modArray(units, units.findIndex(x => x.id === p) + 1).id)} 
                 className='absolute right-1 top-0 bottom-0 my-auto' />}
-                {isExpanded ? <ExitFullScreenIcon onClick={() => setIsExpanded(false)} className='absolute right-2 bottom-2' />
-                    : <EnterFullScreenIcon onClick={() => setIsExpanded(true)} className='absolute right-2 bottom-2' />}
+                {isExpanded ? <ExitFullScreenIcon onClick={() => setIsExpanded(false)} className='absolute right-2 bottom-2 hover:opacity-40' />
+                    : <EnterFullScreenIcon onClick={() => setIsExpanded(true)} className='absolute right-2 bottom-2 hover:opacity-40' />}
             </div>
         </div>
     )

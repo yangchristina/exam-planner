@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import CheckList from './CheckList'
 import { CheckCircledIcon, CheckIcon, Pencil1Icon } from '@radix-ui/react-icons'
 import { IconBar } from './Course'
@@ -29,27 +29,29 @@ const LearningGoals = ({ unitId, examId, unit, debouncedEdit, setChecked }: {
     // use a textarea to edit
 
     const outsideAlertRef = useRef(null);
-    useOutsideAlerter(outsideAlertRef, () => setIsEditing(false));
+    const outsideAlertOmitRef = useRef(null);
+    useOutsideAlerter(outsideAlertRef, () => setIsEditing(false), [outsideAlertOmitRef]);
 
     const { storage, list } = unit.learningGoals
 
     const [isEditing, setIsEditing] = useState(false)
     // const { item: paragraph, set, isLoading } = useForageItem(`${examId}-${unitId}-learningGoals`, (value: unknown) => typeof value === 'string', '')
 
-    // useEffect(() => {
-    //     const list = storageToList(paragraph)
-    //     setList(list)
-    //     updateProgress(list)
-    // }, [isLoading])
+    useEffect(() => {
+        console.log("CHANGED", isEditing)
+        console.log()
+    }, [isEditing])
 
     return (
         <div className='px-6 py-4 flex-1 overflow-y-auto text-xs' >
             <IconBar>
-                <Pencil1Icon className='h-5 w-5 z-10' onClick={() => setIsEditing(p => !p)} />
+                <Pencil1Icon ref={outsideAlertOmitRef} className='h-5 w-5 z-50 hover:text-green-700 hover:scale-110'
+                    onClick={() => setIsEditing(p=>!p)}
+                />
             </IconBar>
             {isEditing ?
                 <div className='relative w-full h-full'>
-                    <textarea ref={outsideAlertRef} defaultValue={storage} className='border w-full h-full resize-none'
+                    <textarea ref={outsideAlertRef} defaultValue={storage} className='border w-full h-full resize-none p-'
                         onChange={(e) => debouncedEdit(unitId, e.target.value)}
                     />
                     <CheckCircledIcon className='absolute bottom-2 right-2 hover:text-green-600' />
