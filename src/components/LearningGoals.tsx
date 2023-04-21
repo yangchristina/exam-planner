@@ -51,7 +51,7 @@ const LearningGoals = ({ unitId, examId, unit, debouncedEdit, setChecked }: {
             </IconBar>
             {isEditing ?
                 <div className='relative w-full h-full'>
-                    <textarea ref={outsideAlertRef} defaultValue={storage} className='border w-full h-full resize-none p-'
+                    <textarea ref={outsideAlertRef} defaultValue={storage} className='border w-full h-full resize-none p-2'
                         onChange={(e) => debouncedEdit(unitId, e.target.value)}
                     />
                     <CheckCircledIcon className='absolute bottom-2 right-2 hover:text-green-600' />
