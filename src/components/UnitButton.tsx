@@ -24,13 +24,27 @@ const style = {
       1: {
         background: '$gray4'
       }
+    },
+    disableHover: {
+      true: {
+        '&:hover': {
+          '&:not(&:focus-within)': {
+            opacity: 1
+          }
+        },
+      }
     }
   }
 }
 
 const Button = styled("button", style)
 
-export const NonUnitButton = styled("div", style)
+export const NonUnitButton = styled("div", {
+  ...style,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+})
 // interface Option {
 //   label: string,
 //   rightSlot?: JSX.Element,

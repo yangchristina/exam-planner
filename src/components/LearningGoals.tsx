@@ -5,22 +5,6 @@ import { IconBar } from './Course'
 import { FullUnit } from '@/types/Unit'
 import { useOutsideAlerter } from '@/hooks/useOutsideAlerter'
 
-function storageToList(para: string) {
-    return para.split("\n").filter(Boolean).map((item) => {
-        const numStr = item.trim().slice(0, 2).trim()
-        let text = item.trim().slice(2).trim()
-        let num = numStr === '1.' ? 1 : numStr === '0.' ? 0 : null
-        if (num === null) {
-            num = 0
-            text = item.trim()
-        }
-        return { checked: num === 1, text }
-    })
-}
-
-function listToStorage(list: { checked: boolean, text: string }[]) {
-    return list.map(({ checked, text }) => `${checked ? '1.' : '0.'} ${text}`).join("\n")
-}
 
 const LearningGoals = ({ unitId, examId, unit, debouncedEdit, setChecked }: {
     unitId: number, examId: string, unit: FullUnit, debouncedEdit: any, setChecked: (id: number, index: number, checked: boolean) => void
@@ -43,26 +27,30 @@ const LearningGoals = ({ unitId, examId, unit, debouncedEdit, setChecked }: {
     }, [isEditing])
 
     return (
-        <div className='px-6 py-4 flex-1 overflow-y-auto text-xs' >
+        <div className='px-6 relative py-4 flex-1 overflow-y-auto text-xs' >
             <IconBar>
                 <Pencil1Icon ref={outsideAlertOmitRef} className='h-5 w-5 z-50 hover:text-green-700 hover:scale-110'
-                    onClick={() => setIsEditing(p=>!p)}
+                    onClick={() => setIsEditing(p => !p)}
                 />
             </IconBar>
-            {isEditing ?
-                <div className='relative w-full h-full'>
-                    <textarea ref={outsideAlertRef} defaultValue={storage} className='border w-full h-full resize-none p-2'
-                        onChange={(e) => debouncedEdit(unitId, e.target.value)}
+            {list.length === 0 && !isEditing ? <div className='m-auto absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center text-gray-400'>
+                Click the pencil to add learning goals
+            </div> : null}
+            {
+                isEditing ?
+                    <div className='relative w-full h-full'>
+                        <textarea ref={outsideAlertRef} defaultValue={storage} className='border w-full h-full resize-none p-2'
+                            onChange={(e) => debouncedEdit(unitId, e.target.value)}
+                        />
+                        <CheckCircledIcon className='absolute bottom-2 right-2 hover:text-green-600' />
+                    </div>
+                    : <CheckList
+                        items={list.map(({ text, checked }) => ({ html: <div>{text}</div>, checked }))}
+                        handleChecked={async (index, checked) => {
+                            // const newList = list.map((item, i) => i === index ? { ...item, checked } : item)
+                            setChecked(unitId, index, checked)
+                        }}
                     />
-                    <CheckCircledIcon className='absolute bottom-2 right-2 hover:text-green-600' />
-                </div>
-                : <CheckList
-                    items={list.map(({ text, checked }) => ({ html: <div>{text}</div>, checked }))}
-                    handleChecked={async (index, checked) => {
-                        // const newList = list.map((item, i) => i === index ? { ...item, checked } : item)
-                        setChecked(unitId, index, checked)
-                    }}
-                />
             }
         </div>
     )
