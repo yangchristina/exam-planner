@@ -6,7 +6,7 @@ import Links from './Links'
 import LearningGoals from './LearningGoals'
 import { styled } from '@/stitches.config'
 import { Exam } from '@/types/Course'
-import { Cross1Icon } from '@radix-ui/react-icons'
+import { Cross1Icon, EnterFullScreenIcon, ExitFullScreenIcon } from '@radix-ui/react-icons'
 import useForageItem from '@/hooks/useForageItem'
 import { Link, isLinkList } from '@/types/Link'
 import useUnits from '@/hooks/useUnits'
@@ -37,7 +37,7 @@ const Course = ({ exam, removeExam }: { exam: Exam, removeExam: () => void }) =>
     const { item: links, set, isLoading } = useForageItem<Link[]>(`${exam.id}-practiceExams`, isLinkList, [])
 
     const { unitMap, addUnit, removeUnit, unitAverageProgress, renameUnit, setChecked, debouncedEditLearningGoals } = useUnits(exam.id)
-
+    const [isExpanded, setIsExpanded] = useState(false)
     const practiceExamProgress = links.length > 0 ? links.filter(x => x.checked).length / links.length : 0
     const decimalProgress = mode === 0 ?
         weightedAverage([unitAverageProgress || 0, practiceExamProgress], links.length > 0 && unitAverageProgress ? [0.5, 0.5] : links.length > 0 ? [0, 1] : [1, 0])
@@ -48,21 +48,25 @@ const Course = ({ exam, removeExam }: { exam: Exam, removeExam: () => void }) =>
     if (isLoading) return <div>Loading...</div>
 
     return (
-        <div className="relative w-96 h-96 mx-auto bg-white rounded-xl shadow-lg flex flex-col items-stretch border-2" >
+        <div style={isExpanded ? { width: '50%' } : {}} className="relative m-auto w-96">
+            <div className="relative aspect-square m-auto bg-white rounded-xl shadow-lg flex flex-col items-stretch border-2" >
                 <CourseHeader mode={mode} exam={exam} setMode={setMode}
                     removeExam={removeExam}
                     title={mode === 1 ? "Practice exams" : mode === 0 ? exam.name : "Learning Goals"}
                     subtitle={mode === 1 ? exam.name : mode > 2 ? unitMap[mode].name : undefined}
                 />
-            {mode === 0 ? <CourseUnitNav renameUnit={renameUnit} removeUnit={removeUnit} units={Object.values(unitMap)} addUnit={addUnit} setMode={setMode} />
-                : mode === 1 ? <Links links={links} set={set} /> :
-                    <LearningGoals debouncedEdit={debouncedEditLearningGoals} unit={unitMap[mode]} setChecked={setChecked} examId={exam.id} unitId={mode} />
-            }
-            <ProgressBar progress={progress} />
-            {isFinished && <CourseContextMenu removeExam={removeExam}>
-                <Overlay className='absolute w-full h-full' />
-            </CourseContextMenu>
-            }
+                {mode === 0 ? <CourseUnitNav renameUnit={renameUnit} removeUnit={removeUnit} units={Object.values(unitMap)} addUnit={addUnit} setMode={setMode} />
+                    : mode === 1 ? <Links links={links} set={set} /> :
+                        <LearningGoals debouncedEdit={debouncedEditLearningGoals} unit={unitMap[mode]} setChecked={setChecked} examId={exam.id} unitId={mode} />
+                }
+                <ProgressBar progress={progress} />
+                {isFinished && <CourseContextMenu removeExam={removeExam}>
+                    <Overlay className='absolute w-full h-full' />
+                </CourseContextMenu>
+                }
+                {isExpanded ? <ExitFullScreenIcon onClick={() => setIsExpanded(false)} className='absolute right-2 bottom-2' />
+                    : <EnterFullScreenIcon onClick={() => setIsExpanded(true)} className='absolute right-2 bottom-2' />}
+            </div>
         </div>
     )
 
