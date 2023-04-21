@@ -91,7 +91,7 @@ export const AddUnitButton = ({ color, add }: { color: 0 | 1, add: (x: Unit) => 
       })
       setIsEditing(false)
     })}>
-      <input className='p-1 text-xs border' {...register("name")} />
+      <input placeholder='ex. Unit 1' className='p-1 text-xs border' {...register("name")} />
       <button type="submit"><CheckIcon /></button>
     </form> : "+"}
   </NonUnitButton>
