@@ -43,7 +43,7 @@ const LearningGoals = ({ unitId, examId, unit, debouncedEdit, setChecked }: {
     // }, [isLoading])
 
     return (
-        <div className='p-5 flex-1 overflow-y-auto text-xs' >
+        <div className='px-6 py-4 flex-1 overflow-y-auto text-xs' >
             <IconBar>
                 <Pencil1Icon className='h-5 w-5 z-10' onClick={() => setIsEditing(p => !p)} />
             </IconBar>
