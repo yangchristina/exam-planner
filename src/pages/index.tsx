@@ -15,10 +15,10 @@ const Page = styled('div', {
 
   gridGap: '0',
   display: "grid",
-  gridTemplateColumns: "1.1fr 3fr",
-  gridTemplateAreas: `
-    "calendar courses"
-  `,
+  // gridTemplateColumns: "1.1fr 3fr",
+  // gridTemplateAreas: `
+  //   "calendar courses"
+  // `,
 
   // TODO: switch to breakpoints, minWidth scroll is bad
   minWidth: '1280px',
@@ -38,7 +38,7 @@ export default function Home() {
 
   return (
     <Page>
-      <Timegrid
+      {/* <Timegrid
         containerCss={{ padding: '20px 0px 0px 20px' }}
         firstDay={date}
         days={1}
@@ -49,7 +49,7 @@ export default function Home() {
         handleDateChange={stub}
         labelLeft={<ChevronLeftIcon onClick={()=>setDate(p=>p-MS_PER_DAY)} />}
         labelRight={<ChevronRightIcon onClick={()=>setDate(p=>p+MS_PER_DAY)} />}
-      />
+      /> */}
       {items.length > 0 ? <div className='overflow-auto flex flex-wrap p-8 gap-y-6' >
         {
           items.map((exam, i) => <Course key={i} exam={exam} removeExam={()=>remove(i)} />)
