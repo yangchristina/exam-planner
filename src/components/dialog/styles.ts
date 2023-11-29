@@ -1,4 +1,4 @@
-import { keyframes, styled } from "@/stitches.config";
+import { styled } from "@/stitches.config";
 
 export const animateTransition =  {
     from: {
@@ -79,7 +79,7 @@ export const descriptionStyle = {
 
 export const ButtonBar = styled('div', {
     display: 'flex',
-    justifyContent: 'flex-end', 
-    flexWrap: 'nowrap', 
+    justifyContent: 'flex-end',
+    flexWrap: 'nowrap',
     gap: 15,
 })

@@ -1,21 +1,18 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { styled } from '@/stitches.config'
 import AutoInputArray from './forms/AutoInputArray'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Link, LinkListFormSchema, LinkListSchema, LinkSchema, isLink, isLinkList } from '@/types/Link'
+import { Link, LinkListFormSchema } from '@/types/Link'
 import { fitMinSize } from './forms/utils'
-import useForageItem from '@/hooks/useForageItem'
-import { useOutsideAlerter } from '@/hooks/useOutsideAlerter'
 import { Pencil1Icon } from '@radix-ui/react-icons'
 import CheckList from './CheckList'
 import { IconBar } from './Course'
-import { Checkable, Progress } from '@/types/Course'
 
 export const MIN_LINKS = 1
 export const EMPTY_LINK = { url: '', text: '', checked: false } as const
 
-const Links = ({ links, set }: { 
+const Links = ({ links, set }: {
     set: (value: {
         url: string;
         checked: boolean;

@@ -1,5 +1,5 @@
 
-import React, { Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react';
+import React, { Dispatch, ReactNode, SetStateAction } from 'react';
 import { styled } from '@/stitches.config';
 import * as AlertDialogPrimitive from '@radix-ui/react-alert-dialog';
 import { Button } from '../Button';

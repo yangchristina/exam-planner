@@ -1,8 +1,6 @@
 import React from 'react'
 import UnitButton, { AddUnitButton, NonUnitButton } from './UnitButton'
-import useForageArray from '@/hooks/useForageArray'
-import { isNumber } from 'lodash'
-import { Unit, isUnit } from '@/types/Unit'
+import { Unit } from '@/types/Unit'
 import { styled } from '@/stitches.config'
 import { ArrowLeftIcon } from '@radix-ui/react-icons'
 

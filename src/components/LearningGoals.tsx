@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import CheckList from './CheckList'
-import { CheckCircledIcon, CheckIcon, Pencil1Icon } from '@radix-ui/react-icons'
+import { CheckCircledIcon, Pencil1Icon } from '@radix-ui/react-icons'
 import { IconBar } from './Course'
 import { FullUnit } from '@/types/Unit'
 import { useOutsideAlerter } from '@/hooks/useOutsideAlerter'

@@ -1,4 +1,4 @@
-import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react'
+import { Dispatch, ReactNode, SetStateAction } from 'react'
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { styled } from '@/stitches.config';
 import { contentStyle, overlayStyle, titleStyle, descriptionStyle, animateTransition } from './styles';
@@ -58,5 +58,3 @@ const Dialog = ({ trigger, title, description, children, hasPadding = true, open
 }
 
 export default Dialog
-
-
