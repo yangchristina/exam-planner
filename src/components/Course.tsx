@@ -11,7 +11,7 @@ import useForageItem from '@/hooks/useForageItem'
 import { Link, isLinkList } from '@/types/Link'
 import useUnits from '@/hooks/useUnits'
 import CourseContextMenu from './CourseContextMenu'
-import { mod } from '@/features/calendars/utils'
+import { mod } from '@/utils'
 
 const Overlay = styled(Cross1Icon, {
     background: "$overlay9",
@@ -73,7 +73,7 @@ const Course = ({ exam, removeExam }: { exam: Exam, removeExam: () => void }) =>
                     className='absolute left-1 top-0 bottom-0 my-auto'
                 />
                 }
-                {mode > 2 && <ChevronRightIcon onClick={() => setMode(p => modArray(units, units.findIndex(x => x.id === p) + 1).id)} 
+                {mode > 2 && <ChevronRightIcon onClick={() => setMode(p => modArray(units, units.findIndex(x => x.id === p) + 1).id)}
                 className='absolute right-1 top-0 bottom-0 my-auto' />}
                 {isExpanded ? <ExitFullScreenIcon onClick={() => setIsExpanded(false)} className='absolute h-5 w-5 right-2 bottom-2 hover:opacity-40 hover:scale-90' />
                     : <EnterFullScreenIcon onClick={() => setIsExpanded(true)} className='absolute right-2 bottom-2 hover:opacity-40  hover:scale-110' />}

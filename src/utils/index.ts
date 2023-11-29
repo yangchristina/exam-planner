@@ -11,7 +11,7 @@ export function deepValue(obj: any, pathv: string) {
 };
 
 export function isInt(str: string) {
-    if (typeof str != "string") return false // we only process strings!  
+    if (typeof str != "string") return false // we only process strings!
     // @ts-expect-error type coercion
     return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
         !isNaN(parseInt(str)) // ...and ensure strings of whitespace fail
@@ -172,4 +172,8 @@ export function formatAvailabilities(start: number, end: number): number[] {
         arr.push(i)
     }
     return arr
+}
+
+export function mod(n: number, m: number) { //mod that always gives positive result
+    return ((n % m) + m) % m;
 }
